@@ -3,6 +3,7 @@ package eterea.programa.dia.service.domain.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
@@ -25,7 +26,9 @@ public class ReservaDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime fechaVencimiento;
 
-    private Date horaVencimiento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private LocalTime horaVencimiento = LocalTime.of(0, 0, 0);
+
     private Byte avisoMail = 0;
     private Byte pendiente = 0;
     private Byte confirmada = 0;
