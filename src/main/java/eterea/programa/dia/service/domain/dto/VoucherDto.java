@@ -3,7 +3,7 @@ package eterea.programa.dia.service.domain.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 
 @Data
@@ -20,7 +20,9 @@ public class VoucherDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime fechaVencimiento;
 
-    private Time horaVencimiento = Time.valueOf("00:00:00");
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    private LocalTime horaVencimiento = LocalTime.of(0, 0, 0);
+
     private String nombrePax;
     private Integer paxs;
     private String subeEn = "";
