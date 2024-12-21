@@ -3,6 +3,7 @@ package eterea.programa.dia.service.domain.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.Date;
@@ -51,6 +52,7 @@ public class ReservaDto {
     private Integer reservaOrigenId;
     private Byte facturarExtranjero = 0;
     private Byte fechaAbierta = 0;
+    private BigDecimal diferenciaWeb = BigDecimal.ZERO;
 
     private ClienteDto cliente;
 
