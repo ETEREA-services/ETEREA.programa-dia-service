@@ -90,14 +90,14 @@ public class ProgramaDiaService {
         // Importa las reservas web e intenta facturarlas
         for (OrderNoteDto orderNote : orderNoteService.findAllCompletedByLastTwoDays()) {
             log.debug("importing order_note={}", orderNote.getOrderNumberId());
-            ProgramaDiaDto programaDiaDTO = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
-            try {
-                log.info("imported result={}", JsonMapper.builder().findAndAddModules().build().writerWithDefaultPrettyPrinter().writeValueAsString(programaDiaDTO));
-            } catch (JsonProcessingException e) {
-                log.debug("something went wrong with order_note={}", orderNote.getOrderNumberId());
+            if (orderNote.getPayment() == null) {
+                log.debug("order_note={} no tiene pago", orderNote.getOrderNumberId());
+                continue;
             }
-            if (programaDiaDTO.getVouchers() != null) {
-                VoucherDto voucher = programaDiaDTO.getVouchers().getFirst();
+            ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
+            logProgramaDiaDto(programaDiaDto);
+            if (programaDiaDto.getVouchers() != null) {
+                VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
                 boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853);
                 if (!isFacturado) {
                     log.debug("error facturando reserva={}", voucher.getReservaId());
@@ -115,6 +115,20 @@ public class ProgramaDiaService {
             if (!isFacturado) {
                 log.debug("error facturando reserva={}", reservaContext.getReservaId());
             }
+        }
+    }
+
+    private void logProgramaDiaDto(ProgramaDiaDto programaDiaDto) {
+        log.debug("Processing ProgramaDiaService.logProgramaDiaDto");
+        try {
+            log.info("programaDia -> {}", JsonMapper
+                    .builder()
+                    .findAndAddModules()
+                    .build()
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(programaDiaDto));
+        } catch (JsonProcessingException e) {
+            log.debug("programaDia jsonify error {}", e.getMessage());
         }
     }
 
