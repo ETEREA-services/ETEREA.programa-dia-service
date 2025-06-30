@@ -42,6 +42,12 @@ public class ProgramaDiaController {
         }
     }
 
+    @GetMapping("/importOneFromWeb/{orderNumberId}")
+    public ResponseEntity<Void> importOneFromWeb(@PathVariable Long orderNumberId) {
+        service.importOneFromWeb(orderNumberId, null);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/importManyCompletedFromWeb")
     public ResponseEntity<Void> importManyCompletedFromWeb() {
         service.importManyCompletedFromWeb();

@@ -1,55 +1,53 @@
 # ETEREA.programa-dia-service
 
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
+[![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green.svg)](https://spring.io/projects/spring-boot)
+[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg)](https://spring.io/projects/spring-cloud)
+[![Maven](https://img.shields.io/badge/Maven-3.9.9-orange.svg)](https://maven.apache.org/)
+[![Docker](https://img.shields.io/badge/Docker-✓-blue.svg)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Descripción del Proyecto
-ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas y clientes.
+ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
+
+## Características Principales
+- Gestión de programas del día
+- Manejo de diferencias en precios web
+- Importación automática de programas completados
+- API REST para integración con otros servicios
+- Documentación automática con GitHub Pages y Wiki
+- Sistema de logs mejorado
+- Integración con Spring Cloud
 
 ## Requisitos Previos
 - Java 21
 - Maven 3.9.9
 - Docker (opcional, para despliegue en contenedores)
 
-## Instalación
-1. Clonar el repositorio:
-   ```sh
-   git clone https://github.com/ETEREA-services/ETEREA.programa-dia-service.git
-   cd ETEREA.programa-dia-service
-   ```
-2. Construir el proyecto con Maven:
-   ```sh
-   ./mvnw clean install
-   ```
+## Configuración y Despliegue
+1. Clonar el repositorio
+2. Configurar las variables de entorno necesarias
+3. Ejecutar `mvn clean install`
+4. Para desarrollo local: `mvn spring-boot:run`
+5. Para producción: usar el Dockerfile proporcionado
 
-## Ejecución
-Para ejecutar la aplicación localmente, usar el siguiente comando:
-```sh
-./mvnw spring-boot:run
-```
-
-## Pruebas
-Para ejecutar las pruebas, usar el siguiente comando:
-```sh
-./mvnw test
-```
-
-## Despliegue
-Para construir y ejecutar la imagen Docker, usar los siguientes comandos:
-```sh
-# Construir la imagen Docker
-docker build -t eterea/programa-dia-service .
-
-# Ejecutar el contenedor Docker
-docker run -p 8080:8080 eterea/programa-dia-service
-```
+## Documentación
+- [Documentación de API](https://eterea-services.github.io/ETEREA.programa-dia-service/)
+- [Wiki del Proyecto](https://github.com/ETEREA-services/ETEREA.programa-dia-service/wiki)
+- [Guía de Desarrollo](docs/development-guide.md)
 
 ## Contribución
-Para contribuir al proyecto, por favor seguir los siguientes pasos:
-1. Hacer un fork del repositorio.
-2. Crear una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-3. Realizar los cambios necesarios y hacer commit (`git commit -am 'Agregar nueva funcionalidad'`).
-4. Hacer push a la rama (`git push origin feature/nueva-funcionalidad`).
-5. Crear un Pull Request.
+1. Fork el repositorio
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
 
 ## Licencia
-Este proyecto está licenciado bajo la Licencia Apache 2.0. Ver el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la Licencia Apache 2.0 - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## Contacto
+Daniel Quinteros - [@dqmdz](https://github.com/dqmdz)
+
+Link del Proyecto: [https://github.com/ETEREA-services/ETEREA.programa-dia-service](https://github.com/ETEREA-services/ETEREA.programa-dia-service)
