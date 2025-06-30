@@ -82,6 +82,26 @@ public class ProgramaDiaService {
                 .build();
     }
 
+    public void importOneFromWeb(Long orderNumberId, OrderNoteDto orderNote) {
+        if (orderNote == null) {
+            orderNote = orderNoteService.findByOrderNumberId(orderNumberId);
+        }
+        log.debug("importing order_note={}", orderNote.getOrderNumberId());
+        if (orderNote.getPayment() == null) {
+            log.debug("order_note={} no tiene pago", orderNote.getOrderNumberId());
+            return;
+        }
+        ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
+        logProgramaDiaDto(programaDiaDto);
+        if (programaDiaDto.getVouchers() != null) {
+            VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
+            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853);
+            if (!isFacturado) {
+                log.debug("error facturando reserva={}", voucher.getReservaId());
+            }
+        }
+    }
+
     public void importManyCompletedFromWeb() {
         // Si el negocio no es agencia no hago nada
         if (empresaClient.findTop().getNegocioId() != 54) {
@@ -89,20 +109,7 @@ public class ProgramaDiaService {
         }
         // Importa las reservas web e intenta facturarlas
         for (OrderNoteDto orderNote : orderNoteService.findAllCompletedByLastTwoDays()) {
-            log.debug("importing order_note={}", orderNote.getOrderNumberId());
-            if (orderNote.getPayment() == null) {
-                log.debug("order_note={} no tiene pago", orderNote.getOrderNumberId());
-                continue;
-            }
-            ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
-            logProgramaDiaDto(programaDiaDto);
-            if (programaDiaDto.getVouchers() != null) {
-                VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
-                boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853);
-                if (!isFacturado) {
-                    log.debug("error facturando reserva={}", voucher.getReservaId());
-                }
-            }
+            importOneFromWeb(orderNote.getOrderNumberId(), orderNote);
         }
         // Intenta facturar las reservas que quedaron sin facturar
         for (ReservaContextDto reservaContext : reservaContextClient.findAllByFacturacionPendiente()) {
