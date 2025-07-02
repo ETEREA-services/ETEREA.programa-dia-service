@@ -29,6 +29,7 @@ public class ProgramaDiaService {
     private final MakeFacturaProgramaDiaClient makeFacturaProgramaDiaClient;
 
     private final OrderNoteService orderNoteService;
+    private final TrackClient trackClient;
 
     public ProgramaDiaService(VoucherClient voucherClient,
                               ClienteMovimientoClient clienteMovimientoClient,
@@ -37,7 +38,7 @@ public class ProgramaDiaService {
                               ReservaContextClient reservaContextClient,
                               VouchersClient vouchersClient,
                               MakeFacturaProgramaDiaClient makeFacturaProgramaDiaClient,
-                              OrderNoteService orderNoteService) {
+                              OrderNoteService orderNoteService, TrackClient trackClient) {
         this.voucherClient = voucherClient;
         this.clienteMovimientoClient = clienteMovimientoClient;
         this.reservaOrigenClient = reservaOrigenClient;
@@ -46,6 +47,7 @@ public class ProgramaDiaService {
         this.reservaContextClient = reservaContextClient;
         this.vouchersClient = vouchersClient;
         this.makeFacturaProgramaDiaClient = makeFacturaProgramaDiaClient;
+        this.trackClient = trackClient;
     }
 
     public ProgramaDiaDto findAllByFechaServicio(OffsetDateTime fechaServicio, Boolean soloConfirmados,
@@ -86,16 +88,17 @@ public class ProgramaDiaService {
         if (orderNote == null) {
             orderNote = orderNoteService.findByOrderNumberId(orderNumberId);
         }
+        var track = trackClient.startTracking("import-one-from-web-" + orderNumberId);
         log.debug("importing order_note={}", orderNote.getOrderNumberId());
         if (orderNote.getPayment() == null) {
             log.debug("order_note={} no tiene pago", orderNote.getOrderNumberId());
             return;
         }
-        ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
+        ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId(), track);
         logProgramaDiaDto(programaDiaDto);
         if (programaDiaDto.getVouchers() != null) {
             VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
-            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853);
+            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853, track);
             if (!isFacturado) {
                 log.debug("error facturando reserva={}", voucher.getReservaId());
             }
@@ -118,7 +121,7 @@ public class ProgramaDiaService {
             } catch (JsonProcessingException e) {
                 log.debug("reserva_context=null");
             }
-            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(reservaContext.getReservaId(), 853);
+            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(reservaContext.getReservaId(), 853, null);
             if (!isFacturado) {
                 log.debug("error facturando reserva={}", reservaContext.getReservaId());
             }
