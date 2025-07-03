@@ -202,13 +202,13 @@ def generate_wiki_content(wiki_dir: Path, data_dir: Path):
     try:
         # Home.md
         with open(wiki_dir / 'Home.md', 'w', encoding='utf-8') as f:
-            f.write("""# Eterea Core Service
+            f.write("""# Servicio de Programa del Día
 
-Bienvenido a la Wiki del Servicio Core de Eterea.
+Bienvenido a la Wiki del Servicio de Programa del Día.
 
 ## Propósito
 
-El Servicio Core es el componente central para la gestión financiera y contable, proporcionando funcionalidades esenciales como:
+El Servicio de Programa del Día es el componente central para la gestión financiera y contable, proporcionando funcionalidades esenciales como:
 
 - Gestión de transferencias entre negocios
 - Control de movimientos contables y valores

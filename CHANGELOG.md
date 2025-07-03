@@ -1,3 +1,6 @@
+## [0.3.0] - 2025-07-02
+- feat(service): add tracking and re-enable scheduled task
+
 ## [0.2.0] - 2025-07-02
 - Eliminar temporalmente el Scheduled de Facturación Automática
 - chore(deps): update dependencies and improve documentation

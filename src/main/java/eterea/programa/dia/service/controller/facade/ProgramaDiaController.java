@@ -54,7 +54,7 @@ public class ProgramaDiaController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Scheduled(cron = "0 30 * * * *")
+    // @Scheduled(cron = "0 30 * * * *")
     public ResponseEntity<Void> importManyCompletedFromWebScheduled() {
         service.importManyCompletedFromWeb();
         return new ResponseEntity<>(HttpStatus.OK);

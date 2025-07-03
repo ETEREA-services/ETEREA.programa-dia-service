@@ -88,12 +88,16 @@ public class ProgramaDiaService {
         if (orderNote == null) {
             orderNote = orderNoteService.findByOrderNumberId(orderNumberId);
         }
+        log.debug("Creating track");
         var track = trackClient.startTracking("import-one-from-web-" + orderNumberId);
+        logTrack(track);
         log.debug("importing order_note={}", orderNote.getOrderNumberId());
         if (orderNote.getPayment() == null) {
             log.debug("order_note={} no tiene pago", orderNote.getOrderNumberId());
             return;
         }
+        log.debug("calling importOneFromWeb -> {}", orderNote.getOrderNumberId());
+        logTrack(track);
         ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId(), track);
         logProgramaDiaDto(programaDiaDto);
         if (programaDiaDto.getVouchers() != null) {
@@ -121,7 +125,10 @@ public class ProgramaDiaService {
             } catch (JsonProcessingException e) {
                 log.debug("reserva_context=null");
             }
-            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(reservaContext.getReservaId(), 853, null);
+            log.debug("Creating track");
+            var track = trackClient.startTracking("factura-from-web-pendiente-" + reservaContext.getOrderNumberId());
+            logTrack(track);
+            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(reservaContext.getReservaId(), 853, track);
             if (!isFacturado) {
                 log.debug("error facturando reserva={}", reservaContext.getReservaId());
             }
@@ -139,6 +146,19 @@ public class ProgramaDiaService {
                     .writeValueAsString(programaDiaDto));
         } catch (JsonProcessingException e) {
             log.debug("programaDia jsonify error {}", e.getMessage());
+        }
+    }
+
+    private void logTrack(TrackDto track) {
+        try {
+            log.debug("track -> {}", JsonMapper
+                    .builder()
+                    .findAndAddModules()
+                    .build()
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(track));
+        } catch (JsonProcessingException e) {
+            log.debug("track jsonify error {}", e.getMessage());
         }
     }
 
