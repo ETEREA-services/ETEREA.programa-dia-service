@@ -10,6 +10,8 @@ public class TrackDto {
 
     private String uuid;
     private String descripcion;
+
+    @Builder.Default
     private Status status = Status.IN_PROGRESS;
 
     public enum Status {

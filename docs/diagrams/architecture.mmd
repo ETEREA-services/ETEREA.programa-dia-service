@@ -1,0 +1,13 @@
+graph TD
+    subgraph "Eterea Ecosystem"
+        A[API Gateway] --> PD(programa-dia-service)
+        PD --> FE(factura-electronica-service)
+        PD --> VS(voucher-service)
+        PD --> MW(middleware-eterea-web)
+    end
+
+    subgraph "External Systems"
+        MW --> ERP
+    end
+
+    style PD fill:#bbf,stroke:#333,stroke-width:2px

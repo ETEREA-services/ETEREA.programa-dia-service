@@ -1,3 +1,6 @@
+## [0.3.1] - 2025-07-04
+- fix: Rehabilitación del proceso automático de facturación.
+
 ## [0.3.0] - 2025-07-02
 - feat(service): add tracking and re-enable scheduled task
 

@@ -6,7 +6,6 @@ import eterea.programa.dia.service.service.facade.ProgramaDiaService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,12 +49,6 @@ public class ProgramaDiaController {
 
     @GetMapping("/importManyCompletedFromWeb")
     public ResponseEntity<Void> importManyCompletedFromWeb() {
-        service.importManyCompletedFromWeb();
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @Scheduled(cron = "0 30 * * * *")
-    public ResponseEntity<Void> importManyCompletedFromWebScheduled() {
         service.importManyCompletedFromWeb();
         return new ResponseEntity<>(HttpStatus.OK);
     }
