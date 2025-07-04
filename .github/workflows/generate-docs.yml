@@ -237,10 +237,14 @@ jobs:
             git push --set-upstream https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git master
           fi
 
+      - name: Prepare artifact for deployment
+        run: |
+          mkdir -p _site
+          mv docs/* _site/
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: _site
 
   deploy-pages:
     needs: generate-docs
