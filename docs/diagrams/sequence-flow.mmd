@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant C as Client
+    participant PDC as ProgramaDiaController
+    participant PDS as ProgramaDiaService
+    participant MFF as MakeFacturaClient
+    participant VC as VouchersClient
+    participant ONC as OrderNoteClient
+
+    C->>PDC: GET /programa-dia/{id}
+    PDC->>PDS: getProgramaDia(id)
+    PDS->>MFF: makeFactura(id)
+    MFF-->>PDS: FacturaDto
+    PDS->>VC: getVouchers(id)
+    VC-->>PDS: List<VoucherDto>
+    PDS->>ONC: getOrderNote(id)
+    ONC-->>PDS: OrderNoteDto
+    PDS-->>PDC: ProgramaDiaDto
+    PDC-->>C: 200 OK (ProgramaDiaDto)
