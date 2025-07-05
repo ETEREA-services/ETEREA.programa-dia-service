@@ -1,13 +1,13 @@
 classDiagram
     class ProgramaDiaDto {
         +FacturaDto factura
-        +List<VoucherDto> vouchers
+        +List~VoucherDto~ vouchers
         +OrderNoteDto orderNote
     }
 
     class FacturaDto {
         +String numero
-        +Date fecha
+        +String fecha
         +ClienteDto cliente
     }
 
@@ -16,13 +16,11 @@ classDiagram
         +String servicio
     }
 
-
-
     class OrderNoteDto {
         +String id
-        +List<ProductTransactionDto> transactions
+        +List~ProductTransactionDto~ transactions
     }
 
-    ProgramaDiaDto "1" *-- "1" FacturaDto
-    ProgramaDiaDto "1" *-- "N" VoucherDto
-    ProgramaDiaDto "1" *-- "1" OrderNoteDto
+    ProgramaDiaDto "1" -- "1" FacturaDto : contiene
+    ProgramaDiaDto "1" -- "N" VoucherDto : contiene
+    ProgramaDiaDto "1" -- "1" OrderNoteDto : contiene
