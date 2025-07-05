@@ -1,28 +1,5 @@
 sequenceDiagram
-    actor C as Client
-    participant PDC as ProgramaDiaController
-    participant PDS as ProgramaDiaService
-    participant MFF as MakeFacturaClient
-    participant VC as VouchersClient
-    participant ONC as OrderNoteClient
-
-    C->>PDC: GET /programa-dia/{id}
-    activate PDC
-    PDC->>PDS: getProgramaDia(id)
-    activate PDS
-    PDS->>MFF: makeFactura(id)
-    activate MFF
-    MFF-->>PDS: FacturaDto
-    deactivate MFF
-    PDS->>VC: getVouchers(id)
-    activate VC
-    VC-->>PDS: List of VoucherDto
-    deactivate VC
-    PDS->>ONC: getOrderNote(id)
-    activate ONC
-    ONC-->>PDS: OrderNoteDto
-    deactivate ONC
-    PDS-->>PDC: ProgramaDiaDto
-    deactivate PDS
-    PDC-->>C: 200 OK (ProgramaDiaDto)
-    deactivate PDC
+    participant Alice
+    participant Bob
+    Alice->>Bob: Hello Bob, how are you?
+    Bob-->>Alice: I am good, thanks!
