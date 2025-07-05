@@ -1,8 +1,26 @@
 classDiagram
-    class A {
-        -String name
+    class ProgramaDiaDto {
+        +FacturaDto factura
+        +List~VoucherDto~ vouchers
+        +OrderNoteDto orderNote
     }
-    class B {
-        -String id
+
+    class FacturaDto {
+        +String numero
+        +String fecha
+        +ClienteDto cliente
     }
-    A --|> B : Extends
+
+    class VoucherDto {
+        +String codigo
+        +String servicio
+    }
+
+    class OrderNoteDto {
+        +String id
+        +List~ProductTransactionDto~ transactions
+    }
+
+    ProgramaDiaDto "1" -- "1" FacturaDto : contiene
+    ProgramaDiaDto "1" -- "N" VoucherDto : contiene
+    ProgramaDiaDto "1" -- "1" OrderNoteDto : contiene
