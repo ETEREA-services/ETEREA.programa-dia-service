@@ -8,6 +8,7 @@ import eterea.programa.dia.service.client.core.facade.VouchersClient;
 import eterea.programa.dia.service.domain.dto.*;
 import eterea.programa.dia.service.domain.dto.extern.OrderNoteDto;
 import eterea.programa.dia.service.exception.ProgramaDiaException;
+import eterea.programa.dia.service.service.util.RequestUuidHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -88,24 +89,29 @@ public class ProgramaDiaService {
         if (orderNote == null) {
             orderNote = orderNoteService.findByOrderNumberId(orderNumberId);
         }
-        log.debug("Creating track");
-        var track = trackClient.startTracking("import-one-from-web-" + orderNumberId);
-        logTrack(track);
         log.debug("importing order_note={}", orderNote.getOrderNumberId());
         if (orderNote.getPayment() == null) {
             log.debug("order_note={} no tiene pago", orderNote.getOrderNumberId());
             return;
         }
-        log.debug("calling importOneFromWeb -> {}", orderNote.getOrderNumberId());
+        var track = trackClient.startTracking("import-one-from-web-" + orderNumberId);
         logTrack(track);
-        ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId(), track);
-        logProgramaDiaDto(programaDiaDto);
-        if (programaDiaDto.getVouchers() != null) {
-            VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
-            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853, track);
-            if (!isFacturado) {
-                log.debug("error facturando reserva={}", voucher.getReservaId());
+        final String trackUuid = track.getUuid();
+        log.debug("calling core.importOneFromWeb -> {}", orderNote.getOrderNumberId());
+        try {
+            RequestUuidHolder.set(trackUuid);
+            ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
+            logProgramaDiaDto(programaDiaDto);
+            if (programaDiaDto.getVouchers() != null) {
+                VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
+                log.debug("calling core.facturaReserva -> {}", voucher.getReservaId());
+                boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853);
+                if (!isFacturado) {
+                    log.debug("error facturando reserva={}", voucher.getReservaId());
+                }
             }
+        } finally {
+            RequestUuidHolder.clear();
         }
     }
 
@@ -128,9 +134,15 @@ public class ProgramaDiaService {
             log.debug("Creating track");
             var track = trackClient.startTracking("factura-from-web-pendiente-" + reservaContext.getOrderNumberId());
             logTrack(track);
-            boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(reservaContext.getReservaId(), 853, track);
-            if (!isFacturado) {
-                log.debug("error facturando reserva={}", reservaContext.getReservaId());
+            try {
+                RequestUuidHolder.set(track.getUuid());
+                log.debug("calling core.facturaReserva -> {}", reservaContext.getReservaId());
+                boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(reservaContext.getReservaId(), 853);
+                if (!isFacturado) {
+                    log.debug("error facturando reserva -> {}", reservaContext.getReservaId());
+                }
+            } finally {
+                RequestUuidHolder.clear();
             }
         }
     }
