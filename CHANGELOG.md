@@ -1,3 +1,9 @@
+## [0.4.0] - 2025-07-06
+- feat(docs): implementa pipeline de generación de documentación automática
+- fix(ci): mejora el script de renderizado de Mermaid en la página de documentación
+- fix(docs): corrige la sintaxis de los diagramas Mermaid
+- fix(ci): corrige la ruta del artefacto para el despliegue de GitHub Pages
+
 ## [0.3.1] - 2025-07-04
 - fix: Rehabilitación del proceso automático de facturación.
 
