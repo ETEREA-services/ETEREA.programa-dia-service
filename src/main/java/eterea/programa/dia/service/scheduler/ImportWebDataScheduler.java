@@ -17,7 +17,7 @@ public class ImportWebDataScheduler {
         this.service = service;
     }
 
-    @Scheduled(cron = "0 30 * * * *")
+    //@Scheduled(cron = "0 30 * * * *")
     public void importManyCompletedFromWebScheduled() {
         service.importManyCompletedFromWeb();
     }
