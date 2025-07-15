@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient("core-service/api/core/reservacontext")
+@FeignClient(name = "core-service", contextId = "reservaContextClient", path = "/api/core/reservacontext")
 public interface ReservaContextClient {
 
     @GetMapping("/facturacion/pendiente")

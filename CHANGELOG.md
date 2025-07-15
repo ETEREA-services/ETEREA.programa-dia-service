@@ -1,3 +1,8 @@
+## [0.4.0] - 2025-07-15
+- feat: Suspendida temporalmente la facturación automática (commit 3fe4351)
+- feat(tracking): Propagación de X-Request-ID en llamadas Feign (commit 3b80204)
+- fix(ci): Mejoras en el script de renderizado de Mermaid y documentación automática (ad3c48f, f2772d8)
+- chore(deps): Actualización a Spring Boot Starter Parent 3.5.3 y Spring Cloud 2025.0.0 (pom.xml)
 ## [0.4.0] - 2025-07-06
 - feat(docs): implementa pipeline de generación de documentación automática
 - fix(ci): mejora el script de renderizado de Mermaid en la página de documentación

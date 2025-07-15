@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@FeignClient("core-service/api/core/voucher")
+@FeignClient(name = "core-service", contextId = "voucherClient", path = "/api/core/voucher")
 public interface VoucherClient {
 
     @GetMapping("/today/{user}")
