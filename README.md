@@ -1,12 +1,24 @@
 # ETEREA.programa-dia-service
 
+**Versión:** 0.4.0  
+**Fecha de lanzamiento:** 2025-07-15
+
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
-[![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+![Java](https://img.shields.io/badge/Java-24-blue.svg)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-green.svg)](https://spring.io/projects/spring-boot)
 [![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg)](https://spring.io/projects/spring-cloud)
 [![Maven](https://img.shields.io/badge/Maven-3.9.9-orange.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-✓-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
+
+## Cambios recientes
+
+- Suspendida temporalmente la facturación automática.
+- Propagación de X-Request-ID en llamadas Feign.
+- Actualización de dependencias principales:
+  - Spring Boot Starter Parent: 3.5.3
+  - Spring Cloud: 2025.0.0
+  - Java: 24
 
 ## Descripción del Proyecto
 ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
@@ -21,7 +33,7 @@ ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utili
 - Integración con Spring Cloud
 
 ## Requisitos Previos
-- Java 21
+- Java 24
 - Maven 3.9.9
 - Docker (opcional, para despliegue en contenedores)
 
@@ -31,6 +43,10 @@ ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utili
 3. Ejecutar `mvn clean install`
 4. Para desarrollo local: `mvn spring-boot:run`
 5. Para producción: usar el Dockerfile proporcionado
+
+## Diagramas y documentación
+
+Los diagramas Mermaid (`architecture.mmd`, `data-model.mmd`, `sequence-flow.mmd`) están actualizados a la fecha del release.
 
 ## Documentación
 - [Documentación de API](https://eterea-services.github.io/ETEREA.programa-dia-service/)

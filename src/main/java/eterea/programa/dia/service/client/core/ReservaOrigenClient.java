@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient("core-service/api/core/reservaorigen")
+@FeignClient(name = "core-service", contextId = "reservaOrigenClient", path = "/api/core/reservaorigen")
 public interface ReservaOrigenClient {
 
     @GetMapping("/")

@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient("core-service/api/core/make-factura-programa-dia")
+@FeignClient(name = "core-service", contextId = "makeFacturaProgramaDiaClient", path = "/api/core/make-factura-programa-dia")
 public interface MakeFacturaProgramaDiaClient {
 
     @GetMapping("/factura/{reservaId}/{comprobanteId}")
