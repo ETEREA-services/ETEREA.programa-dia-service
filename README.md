@@ -1,7 +1,7 @@
 # ETEREA.programa-dia-service
 
-**Versión:** 0.4.0  
-**Fecha de lanzamiento:** 2025-07-15
+**Versión:** 0.5.0  
+**Fecha de lanzamiento:** 2025-07-24
 
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
 ![Java](https://img.shields.io/badge/Java-24-blue.svg)
@@ -13,12 +13,12 @@
 
 ## Cambios recientes
 
-- Suspendida temporalmente la facturación automática.
-- Propagación de X-Request-ID en llamadas Feign.
-- Actualización de dependencias principales:
-  - Spring Boot Starter Parent: 3.5.3
-  - Spring Cloud: 2025.0.0
-  - Java: 24
+- Migración de Eureka a Consul como discovery service.
+- Integración de análisis SonarCloud y mejoras de caché en CI.
+- Instalación de curl en la imagen final de Docker.
+- Eliminación de Dockerfile.local.
+- Añadido commons-lang3 a dependencyManagement.
+- Exposición del endpoint `health` en actuator.
 
 ## Descripción del Proyecto
 ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
@@ -30,7 +30,7 @@ ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utili
 - API REST para integración con otros servicios
 - Documentación automática con GitHub Pages y Wiki
 - Sistema de logs mejorado
-- Integración con Spring Cloud
+-- Integración con Spring Cloud y Consul
 
 ## Requisitos Previos
 - Java 24

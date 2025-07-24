@@ -11,7 +11,7 @@
     <groupId>eterea</groupId>
     <artifactId>programa-dia-service</artifactId>
     <version>0.4.0</version>
-    <name>eterea.programa-dia-service</name>
+    <name>ETEREA.programa-dia-service</name>
     <description>eterea.programa-dia-service</description>
     <url/>
     <licenses>
@@ -53,7 +53,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -97,8 +97,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.18.0</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
