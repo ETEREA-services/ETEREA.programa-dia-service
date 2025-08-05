@@ -4,6 +4,8 @@ graph TD
         PD --> FE(factura-electronica-service)
         PD --> VS(voucher-service)
         PD --> MW(middleware-eterea-web)
+        PD --> SC(Scheduler: ImportWebDataScheduler)
+        PD --> CO(Consul Service Discovery)
     end
 
     subgraph "External Systems"
@@ -11,3 +13,4 @@ graph TD
     end
 
     style PD fill:#bbf,stroke:#333,stroke-width:2px
+    style CO fill:#cfc,stroke:#333,stroke-width:2px

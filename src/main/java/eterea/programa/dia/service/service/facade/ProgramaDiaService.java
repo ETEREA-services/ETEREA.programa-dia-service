@@ -1,7 +1,5 @@
 package eterea.programa.dia.service.service.facade;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import eterea.programa.dia.service.client.core.*;
 import eterea.programa.dia.service.client.core.facade.MakeFacturaProgramaDiaClient;
 import eterea.programa.dia.service.client.core.facade.VouchersClient;
@@ -95,13 +93,13 @@ public class ProgramaDiaService {
             return;
         }
         var track = trackClient.startTracking("import-one-from-web-" + orderNumberId);
-        logTrack(track);
+        log.debug("Track -> {}", track.jsonify());
         final String trackUuid = track.getUuid();
         log.debug("calling core.importOneFromWeb -> {}", orderNote.getOrderNumberId());
         try {
             RequestUuidHolder.set(trackUuid);
             ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
-            logProgramaDiaDto(programaDiaDto);
+            log.debug("programaDiaDto -> {}", programaDiaDto.jsonify());
             if (programaDiaDto.getVouchers() != null) {
                 VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
                 log.debug("calling core.facturaReserva -> {}", voucher.getReservaId());
@@ -126,14 +124,10 @@ public class ProgramaDiaService {
         }
         // Intenta facturar las reservas que quedaron sin facturar
         for (ReservaContextDto reservaContext : reservaContextClient.findAllByFacturacionPendiente()) {
-            try {
-                log.debug("reserva_context={}", JsonMapper.builder().findAndAddModules().build().writerWithDefaultPrettyPrinter().writeValueAsString(reservaContext));
-            } catch (JsonProcessingException e) {
-                log.debug("reserva_context=null");
-            }
+            log.debug("ReservaContext -> {}", reservaContext.jsonify());
             log.debug("Creating track");
             var track = trackClient.startTracking("factura-from-web-pendiente-" + reservaContext.getOrderNumberId());
-            logTrack(track);
+            log.debug("Track -> {}", track.jsonify());
             try {
                 RequestUuidHolder.set(track.getUuid());
                 log.debug("calling core.facturaReserva -> {}", reservaContext.getReservaId());
@@ -144,33 +138,6 @@ public class ProgramaDiaService {
             } finally {
                 RequestUuidHolder.clear();
             }
-        }
-    }
-
-    private void logProgramaDiaDto(ProgramaDiaDto programaDiaDto) {
-        log.debug("Processing ProgramaDiaService.logProgramaDiaDto");
-        try {
-            log.info("programaDia -> {}", JsonMapper
-                    .builder()
-                    .findAndAddModules()
-                    .build()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(programaDiaDto));
-        } catch (JsonProcessingException e) {
-            log.debug("programaDia jsonify error {}", e.getMessage());
-        }
-    }
-
-    private void logTrack(TrackDto track) {
-        try {
-            log.debug("track -> {}", JsonMapper
-                    .builder()
-                    .findAndAddModules()
-                    .build()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(track));
-        } catch (JsonProcessingException e) {
-            log.debug("track jsonify error {}", e.getMessage());
         }
     }
 

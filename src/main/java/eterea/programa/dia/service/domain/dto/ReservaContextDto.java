@@ -1,5 +1,7 @@
 package eterea.programa.dia.service.domain.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +34,18 @@ public class ReservaContextDto {
     private BigDecimal diferenciaWeb = BigDecimal.ZERO;
     @Builder.Default
     private Byte facturaArca = 0;
+
+    public String jsonify() {
+        try {
+            return JsonMapper
+                    .builder()
+                    .findAndAddModules()
+                    .build()
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return "jsonify error -> " + e.getMessage();
+        }
+    }
 
 }

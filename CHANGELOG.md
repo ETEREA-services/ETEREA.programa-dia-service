@@ -1,11 +1,22 @@
 ## [0.5.0] - 2025-07-24
-- feat(config): Migración de Eureka a Consul como discovery service (pom.xml, bootstrap.yml)
-- feat(ci): Integración de análisis SonarCloud y mejoras de caché en GitHub Actions (maven.yml)
-- feat(docker): Instalación de curl en la imagen final de Docker (Dockerfile)
-- chore: Eliminación de Dockerfile.local (ahora solo se usa Dockerfile principal)
-- feat(deps): Añadido commons-lang3 a dependencyManagement (pom.xml)
-- feat(config): Exposición del endpoint `health` en actuator (bootstrap.yml)
-- refactor: Actualización de nombre de proyecto en pom.xml
+## [0.6.0] - 2025-08-05
+ - feat: Migración completa de Eureka a Consul como discovery service (bootstrap.yml, pom.xml)
+ - feat: Añadido soporte para importación automática de programas completados vía scheduler (ImportWebDataScheduler)
+ - feat: Nuevos DTOs y métodos de serialización JSON (ProgramaDiaDto, ReservaContextDto, TrackDto)
+ - feat: Añadido deserializador personalizado para OffsetDateTime (OffsetDateTimeDeserializer)
+ - fix: Refactor en ProgramaDiaService para mejorar trazabilidad y logging
+ - test: Nuevos tests unitarios para servicios, DTOs y utilidades
+ - chore: Actualización de Spring Boot Starter Parent a 3.5.4
+ - chore: Actualización de endpoints expuestos en actuator (bootstrap.yml)
+
+## [0.5.0] - 2025-07-24
+ - feat(config): Migración de Eureka a Consul como discovery service (pom.xml, bootstrap.yml)
+ - feat(ci): Integración de análisis SonarCloud y mejoras de caché en GitHub Actions (maven.yml)
+ - feat(docker): Instalación de curl en la imagen final de Docker (Dockerfile)
+ - chore: Eliminación de Dockerfile.local (ahora solo se usa Dockerfile principal)
+ - feat(deps): Añadido commons-lang3 a dependencyManagement (pom.xml)
+ - feat(config): Exposición del endpoint `health` en actuator (bootstrap.yml)
+ - refactor: Actualización de nombre de proyecto en pom.xml
 ## [0.4.0] - 2025-07-06
 - feat(docs): implementa pipeline de generación de documentación automática
 - fix(ci): mejora el script de renderizado de Mermaid en la página de documentación
