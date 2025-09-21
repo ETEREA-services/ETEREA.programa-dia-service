@@ -30,7 +30,9 @@ jobs:
           cache: maven
 
       - name: Generate Dependency Tree
-        run: mvn dependency:tree -DoutputFile=docs/dependency-tree.txt
+        run: |
+          mkdir -p docs
+          mvn dependency:tree -DoutputFile=docs/dependency-tree.txt
 
       - name: Generate Project Documentation
         env:

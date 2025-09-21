@@ -1,11 +1,11 @@
 # ETEREA.programa-dia-service
 
-**Versión:** 0.6.0  
-**Fecha de lanzamiento:** 2025-08-05
+**Versión:** 0.6.1
+**Fecha de lanzamiento:** 2025-09-21
 
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
 ![Java](https://img.shields.io/badge/Java-24-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.4-green.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-green.svg)
 [![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg)](https://spring.io/projects/spring-cloud)
 [![Maven](https://img.shields.io/badge/Maven-3.9.9-orange.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-✓-blue.svg)](https://www.docker.com/)
@@ -13,12 +13,9 @@
 
 ## Cambios recientes
 
-- Migración completa de Eureka a Consul como discovery service.
-- Añadido soporte para importación automática de programas completados vía scheduler.
-- Nuevos DTOs y métodos de serialización JSON.
-- Añadido deserializador personalizado para OffsetDateTime.
-- Actualización de Spring Boot Starter Parent a 3.5.4.
-- Nuevos tests unitarios y mejoras en logging.
+- Actualización de Spring Boot Starter Parent a 3.5.6.
+- Actualización de springdoc-openapi-starter-webmvc-ui a 2.8.10.
+- Refactor en ProgramaDiaService para usar @RequiredArgsConstructor.
 
 ## Descripción del Proyecto
 ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
