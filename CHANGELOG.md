@@ -1,4 +1,8 @@
-## [0.5.0] - 2025-07-24
+## [0.6.1] - 2025-09-21
+- chore: Update Spring Boot Starter Parent to 3.5.6
+- chore: Update springdoc-openapi-starter-webmvc-ui to 2.8.10
+- refactor: Replace manual constructor with @RequiredArgsConstructor in ProgramaDiaService
+
 ## [0.6.0] - 2025-08-05
  - feat: Migración completa de Eureka a Consul como discovery service (bootstrap.yml, pom.xml)
  - feat: Añadido soporte para importación automática de programas completados vía scheduler (ImportWebDataScheduler)

@@ -7,6 +7,7 @@ import eterea.programa.dia.service.domain.dto.*;
 import eterea.programa.dia.service.domain.dto.extern.OrderNoteDto;
 import eterea.programa.dia.service.exception.ProgramaDiaException;
 import eterea.programa.dia.service.service.util.RequestUuidHolder;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ProgramaDiaService {
 
     private final VoucherClient voucherClient;
@@ -29,25 +31,6 @@ public class ProgramaDiaService {
 
     private final OrderNoteService orderNoteService;
     private final TrackClient trackClient;
-
-    public ProgramaDiaService(VoucherClient voucherClient,
-                              ClienteMovimientoClient clienteMovimientoClient,
-                              ReservaOrigenClient reservaOrigenClient,
-                              EmpresaClient empresaClient,
-                              ReservaContextClient reservaContextClient,
-                              VouchersClient vouchersClient,
-                              MakeFacturaProgramaDiaClient makeFacturaProgramaDiaClient,
-                              OrderNoteService orderNoteService, TrackClient trackClient) {
-        this.voucherClient = voucherClient;
-        this.clienteMovimientoClient = clienteMovimientoClient;
-        this.reservaOrigenClient = reservaOrigenClient;
-        this.empresaClient = empresaClient;
-        this.orderNoteService = orderNoteService;
-        this.reservaContextClient = reservaContextClient;
-        this.vouchersClient = vouchersClient;
-        this.makeFacturaProgramaDiaClient = makeFacturaProgramaDiaClient;
-        this.trackClient = trackClient;
-    }
 
     public ProgramaDiaDto findAllByFechaServicio(OffsetDateTime fechaServicio, Boolean soloConfirmados,
                                                  Boolean porNombrePax) {
