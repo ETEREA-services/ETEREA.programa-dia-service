@@ -1,11 +1,11 @@
 # ETEREA.programa-dia-service
 
-**Versión:** 0.6.1
-**Fecha de lanzamiento:** 2025-09-21
+**Versión:** 0.7.0
+**Fecha de lanzamiento:** 2026-01-06
 
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
-![Java](https://img.shields.io/badge/Java-24-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-green.svg)
+![Java](https://img.shields.io/badge/Java-25-blue.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.8-green.svg)
 [![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg)](https://spring.io/projects/spring-cloud)
 [![Maven](https://img.shields.io/badge/Maven-3.9.9-orange.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-✓-blue.svg)](https://www.docker.com/)
@@ -13,9 +13,9 @@
 
 ## Cambios recientes
 
-- Actualización de Spring Boot Starter Parent a 3.5.6.
-- Actualización de springdoc-openapi-starter-webmvc-ui a 2.8.10.
-- Refactor en ProgramaDiaService para usar @RequiredArgsConstructor.
+- Actualización de Java a versión 25.
+- Actualización de Spring Boot Starter Parent a 3.5.8.
+- Cambio en el scheduler de importación web para ejecutarse cada 10 minutos en lugar de cada hora.
 
 ## Descripción del Proyecto
 ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
@@ -30,7 +30,7 @@ ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utili
 -- Integración con Spring Cloud y Consul
 
 ## Requisitos Previos
-- Java 24
+- Java 25
 - Maven 3.9.9
 - Docker (opcional, para despliegue en contenedores)
 
