@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.6</version>
+        <version>3.5.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>eterea</groupId>
     <artifactId>programa-dia-service</artifactId>
-    <version>0.6.1</version>
+    <version>0.7.0</version>
     <name>ETEREA.programa-dia-service</name>
     <description>eterea.programa-dia-service</description>
     <url/>
@@ -27,7 +27,7 @@
         <url/>
     </scm>
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
         <sonar.organization>eterea-services</sonar.organization>
         <sonar.projectKey>ETEREA-services_ETEREA.programa-dia-service</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>

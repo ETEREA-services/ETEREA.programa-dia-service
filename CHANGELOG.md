@@ -1,3 +1,8 @@
+## [0.7.0] - 2026-01-06
+- chore: Update Java version to 25
+- chore: Update Spring Boot Starter Parent to 3.5.8
+- feat: Change ImportWebDataScheduler cron from hourly to every 10 minutes
+
 ## [0.6.1] - 2025-09-21
 - chore: Update Spring Boot Starter Parent to 3.5.6
 - chore: Update springdoc-openapi-starter-webmvc-ui to 2.8.10
