@@ -1,21 +1,28 @@
 # ETEREA.programa-dia-service
 
-**Versión:** 0.7.0
-**Fecha de lanzamiento:** 2026-01-06
+**Versión:** 1.0.0
+**Fecha de lanzamiento:** 2026-05-30
 
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
 ![Java](https://img.shields.io/badge/Java-25-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.8-green.svg)
-[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg)](https://spring.io/projects/spring-cloud)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.6-green.svg)
+[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.0-blue.svg)](https://spring.io/projects/spring-cloud)
 [![Maven](https://img.shields.io/badge/Maven-3.9.9-orange.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-✓-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Cambios recientes
 
-- Actualización de Java a versión 25.
-- Actualización de Spring Boot Starter Parent a 3.5.8.
-- Cambio en el scheduler de importación web para ejecutarse cada 10 minutos en lugar de cada hora.
+- Actualización de Spring Boot Starter Parent a 4.0.6.
+- Actualización de Spring Cloud a 2025.1.0.
+- Actualización de springdoc-openapi a 3.0.2 (con cambio de paquete para WebMvcTest).
+- Eliminación de dependencia spring-boot-starter-aop.
+- Refactor de todos los DTOs: reemplazo de @Data por anotaciones explícitas (@Getter, @Setter, @Builder, @NoArgsConstructor, @AllArgsConstructor).
+- Refactor de controladores y servicios: reemplazo de constructores manuales por @RequiredArgsConstructor.
+- Refactor de ResponseEntity: uso de helpers (ResponseEntity.ok()) en lugar de constructor directo.
+- Nuevas dependencias: spring-boot-starter-webmvc-test, commons-fileupload 1.6.0.
+- Actualización de commons-lang3 a 3.20.0.
+- Actualización de GitHub Actions a versiones más recientes.
 
 ## Descripción del Proyecto
 ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
@@ -27,7 +34,7 @@ ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utili
 - API REST para integración con otros servicios
 - Documentación automática con GitHub Pages y Wiki
 - Sistema de logs mejorado
--- Integración con Spring Cloud y Consul
+- Integración con Spring Cloud y Consul
 
 ## Requisitos Previos
 - Java 25

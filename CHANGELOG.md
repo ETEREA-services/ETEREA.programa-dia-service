@@ -1,3 +1,18 @@
+## [1.0.0] - 2026-05-30
+- feat: Actualización de Spring Boot Starter Parent de 3.5.8 a 4.0.6 (major)
+- feat: Actualización de Spring Cloud de 2025.0.0 a 2025.1.0
+- feat: Actualización de springdoc-openapi de 2.8.10 a 3.0.2 (major)
+- feat: Nuevo test dependency spring-boot-starter-webmvc-test con relocalización de WebMvcTest
+- feat: Refactor de todos los DTOs: @Data reemplazado por @Getter/@Setter/@Builder/@NoArgsConstructor/@AllArgsConstructor
+- feat: Refactor de controladores y servicios: constructores manuales reemplazados por @RequiredArgsConstructor
+- feat: Refactor de ResponseEntity: uso de helpers (ResponseEntity.ok()) en lugar de new ResponseEntity<>()
+- chore: Eliminación de dependencia spring-boot-starter-aop
+- chore: Eliminación de configuración executable=true en spring-boot-maven-plugin
+- chore: Actualización de commons-lang3 a 3.20.0
+- chore: Nueva dependencia commons-fileupload 1.6.0 en dependencyManagement
+- chore: Actualización de GitHub Actions a checkout@v6, setup-java@v5, cache@v5, docker/*@v4/v6/v7, deploy-pages@v5
+- fix: Simplificación del path de artefacto en pipeline de documentación
+
 ## [0.7.0] - 2026-01-06
 - chore: Update Java version to 25
 - chore: Update Spring Boot Starter Parent to 3.5.8

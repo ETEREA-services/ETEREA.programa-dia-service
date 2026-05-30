@@ -1,8 +1,12 @@
 package eterea.programa.dia.service.domain.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioDto {
 
     private String login;
