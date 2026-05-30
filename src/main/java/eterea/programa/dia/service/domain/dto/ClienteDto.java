@@ -1,12 +1,16 @@
 package eterea.programa.dia.service.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClienteDto {
 
     private Long clienteId;

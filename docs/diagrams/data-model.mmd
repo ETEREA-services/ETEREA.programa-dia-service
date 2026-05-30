@@ -1,26 +1,77 @@
 classDiagram
     class ProgramaDiaDto {
-        +FacturaDto factura
         +List~VoucherDto~ vouchers
-        +OrderNoteDto orderNote
-    }
-
-    class FacturaDto {
-        +String numero
-        +String fecha
-        +ClienteDto cliente
+        +List~ReservaOrigenDto~ reservaOrigens
+        +List~ClienteMovimientoDto~ clienteMovimientos
+        +String errorMessage
     }
 
     class VoucherDto {
-        +String codigo
-        +String servicio
+        +Long voucherId
+        +OffsetDateTime fechaServicio
+        +String nombrePax
+        +Integer paxs
+        +String productos
+        +Long reservaId
+        +String numeroVoucher
     }
 
-    class OrderNoteDto {
-        +String id
-        +List~ProductTransactionDto~ transactions
+    class ReservaOrigenDto {
+        +Integer reservaOrigenId
+        +String nombre
     }
 
-    ProgramaDiaDto "1" -- "1" FacturaDto : contiene
+    class ClienteMovimientoDto {
+        +Long clienteMovimientoId
+        +Long reservaId
+        +BigDecimal importe
+        +ComprobanteDto comprobante
+        +ClienteDto cliente
+    }
+
+    class ClienteDto {
+        +Long clienteId
+        +String nombre
+        +String cuit
+        +String razonSocial
+    }
+
+    class ReservaDto {
+        +Long reservaId
+        +String nombrePax
+        +BigDecimal diferenciaWeb
+        +ClienteDto cliente
+    }
+
+    class ComprobanteDto {
+        +Integer comprobanteId
+    }
+
+    class HotelDto {
+        +Integer hotelId
+    }
+
+    class ProveedorDto {
+        +Long proveedorId
+    }
+
+    class UsuarioDto {
+        +String login
+    }
+
+    class MonedaDto {
+        +Integer monedaId
+    }
+
     ProgramaDiaDto "1" -- "N" VoucherDto : contiene
-    ProgramaDiaDto "1" -- "1" OrderNoteDto : contiene
+    ProgramaDiaDto "1" -- "N" ReservaOrigenDto : contiene
+    ProgramaDiaDto "1" -- "N" ClienteMovimientoDto : contiene
+    VoucherDto "1" -- "1" ClienteDto : tiene
+    VoucherDto "1" -- "1" HotelDto : tiene
+    VoucherDto "1" -- "1" ProveedorDto : tiene
+    VoucherDto "1" -- "1" ReservaDto : tiene
+    VoucherDto "1" -- "1" UsuarioDto : tiene
+    ReservaDto "1" -- "1" ClienteDto : tiene
+    ClienteMovimientoDto "1" -- "1" ComprobanteDto : tiene
+    ClienteMovimientoDto "1" -- "1" ClienteDto : tiene
+    ClienteMovimientoDto "1" -- "1" MonedaDto : tiene

@@ -2,27 +2,80 @@ sequenceDiagram
     actor C as Client
     participant PDC as ProgramaDiaController
     participant PDS as ProgramaDiaService
-    participant MFF as MakeFacturaClient
-    participant VC as VouchersClient
+    participant VC as VoucherClient
+    participant ROC as ReservaOrigenClient
+    participant CMC as ClienteMovimientoClient
     participant ONC as OrderNoteClient
+    participant VFC as VouchersClient (Feign)
+    participant TC as TrackClient
+    participant MFPC as MakeFacturaProgramaDiaClient
 
-    C->>PDC: GET /programa-dia/{id}
+    Note over C,MFPC: Flujo: findAllByFechaServicio
+    C->>PDC: GET /fechaServicio/{fecha}/{soloConfirmados}/{porNombrePax}
     activate PDC
-    PDC->>PDS: getProgramaDia(id)
+    PDC->>PDS: findAllByFechaServicio(fecha, soloConfirmados, porNombrePax)
     activate PDS
-    PDS->>MFF: makeFactura(id)
-    activate MFF
-    MFF-->>PDS: FacturaDto
-    deactivate MFF
-    PDS->>VC: getVouchers(id)
+    PDS->>VC: findAllByFechaServicio(...)
     activate VC
-    VC-->>PDS: List of VoucherDto
+    VC-->>PDS: List~VoucherDto~
     deactivate VC
-    PDS->>ONC: getOrderNote(id)
-    activate ONC
-    ONC-->>PDS: OrderNoteDto
-    deactivate ONC
+    PDS->>CMC: findAllByReservaIds(reservaIds)
+    activate CMC
+    CMC-->>PDS: List~ClienteMovimientoDto~
+    deactivate CMC
+    PDS->>ROC: findAll()
+    activate ROC
+    ROC-->>PDS: List~ReservaOrigenDto~
+    deactivate ROC
     PDS-->>PDC: ProgramaDiaDto
     deactivate PDS
     PDC-->>C: 200 OK (ProgramaDiaDto)
+    deactivate PDC
+
+    Note over C,MFPC: Flujo: findByVoucherId
+    C->>PDC: GET /voucher/{voucherId}
+    activate PDC
+    PDC->>PDS: findByVoucherId(voucherId)
+    activate PDS
+    PDS->>VC: findByVoucherId(voucherId)
+    activate VC
+    VC-->>PDS: VoucherDto
+    deactivate VC
+    PDS->>ROC: findByReservaOrigenId(origenId)
+    activate ROC
+    ROC-->>PDS: ReservaOrigenDto
+    deactivate ROC
+    PDS->>CMC: findAllByReservaId(reservaId)
+    activate CMC
+    CMC-->>PDS: List~ClienteMovimientoDto~
+    deactivate CMC
+    PDS-->>PDC: ProgramaDiaDto
+    deactivate PDS
+    PDC-->>C: 200 OK (ProgramaDiaDto)
+    deactivate PDC
+
+    Note over C,MFPC: Flujo: importOneFromWeb / importManyCompletedFromWeb
+    C->>PDC: GET /importOneFromWeb/{orderNumberId}
+    activate PDC
+    PDC->>PDS: importOneFromWeb(orderNumberId)
+    activate PDS
+    PDS->>ONC: findByOrderNumberId(orderNumberId)
+    activate ONC
+    ONC-->>PDS: OrderNoteDto
+    deactivate ONC
+    PDS->>TC: startTracking("import-one-from-web-...")
+    activate TC
+    TC-->>PDS: TrackDto
+    deactivate TC
+    PDS->>VFC: importOneFromWeb(orderNumberId)
+    activate VFC
+    VFC-->>PDS: ProgramaDiaDto
+    deactivate VFC
+    PDS->>MFPC: facturaReserva(reservaId, 853)
+    activate MFPC
+    MFPC-->>PDS: Boolean (isFacturado)
+    deactivate MFPC
+    PDS-->>PDC: void
+    deactivate PDS
+    PDC-->>C: 200 OK
     deactivate PDC
