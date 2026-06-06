@@ -8,6 +8,8 @@ sequenceDiagram
     participant ONC as OrderNoteClient
     participant VFC as VouchersClient (Feign)
     participant TC as TrackClient
+    participant EC as EmpresaClient
+    participant RC as ReservaContextClient
     participant MFPC as MakeFacturaProgramaDiaClient
 
     Note over C,MFPC: Flujo: findAllByFechaServicio
@@ -54,7 +56,7 @@ sequenceDiagram
     PDC-->>C: 200 OK (ProgramaDiaDto)
     deactivate PDC
 
-    Note over C,MFPC: Flujo: importOneFromWeb / importManyCompletedFromWeb
+    Note over C,MFPC: Flujo: importOneFromWeb
     C->>PDC: GET /importOneFromWeb/{orderNumberId}
     activate PDC
     PDC->>PDS: importOneFromWeb(orderNumberId)
@@ -75,6 +77,38 @@ sequenceDiagram
     activate MFPC
     MFPC-->>PDS: Boolean (isFacturado)
     deactivate MFPC
+    PDS-->>PDC: void
+    deactivate PDS
+    PDC-->>C: 200 OK
+    deactivate PDC
+
+    Note over C,MFPC: Flujo: importManyCompletedFromWeb
+    C->>PDC: GET /importManyCompletedFromWeb
+    activate PDC
+    PDC->>PDS: importManyCompletedFromWeb()
+    activate PDS
+    PDS->>EC: findTop()
+    activate EC
+    EC-->>PDS: EmpresaDto
+    deactivate EC
+    Note over PDS: Valida negocioId != 54 (agencia)
+    PDS->>ONC: findAllCompletedByLastTwoDays()
+    activate ONC
+    ONC-->>PDS: List~OrderNoteDto~
+    deactivate ONC
+    loop Por cada OrderNote completado
+        PDS->>PDS: importOneFromWeb(orderNumberId, orderNote)
+    end
+    PDS->>RC: findAllByFacturaPendiente()
+    activate RC
+    RC-->>PDS: List~ReservaContextDto~
+    deactivate RC
+    loop Por cada reserva con factura pendiente
+        PDS->>MFPC: facturaReserva(reservaId, 853)
+        activate MFPC
+        MFPC-->>PDS: Boolean (isFacturado)
+        deactivate MFPC
+    end
     PDS-->>PDC: void
     deactivate PDS
     PDC-->>C: 200 OK
