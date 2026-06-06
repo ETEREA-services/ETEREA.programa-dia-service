@@ -14,6 +14,11 @@ classDiagram
         +String productos
         +Long reservaId
         +String numeroVoucher
+        +UsuarioDto user
+        +ClienteDto cliente
+        +HotelDto hotel
+        +ProveedorDto proveedor
+        +ReservaDto reserva
     }
 
     class ReservaOrigenDto {
@@ -27,6 +32,7 @@ classDiagram
         +BigDecimal importe
         +ComprobanteDto comprobante
         +ClienteDto cliente
+        +MonedaDto moneda
     }
 
     class ClienteDto {
@@ -45,6 +51,7 @@ classDiagram
 
     class ComprobanteDto {
         +Integer comprobanteId
+        +CuentaDto cuenta
     }
 
     class HotelDto {
@@ -63,6 +70,33 @@ classDiagram
         +Integer monedaId
     }
 
+    class TrackDto {
+        +String uuid
+        +String descripcion
+        +String status
+    }
+
+    class EmpresaDto {
+        +Integer empresaId
+        +Integer negocioId
+        +String razonSocial
+    }
+
+    class CuentaDto {
+        +Long numeroCuenta
+        +String nombre
+    }
+
+    class ReservaContextDto {
+        +Long reservaContextId
+        +Long reservaId
+        +Long voucherId
+        +Long clienteMovimientoId
+        +Long orderNumberId
+        +Boolean facturaPendiente
+        +BigDecimal diferenciaWeb
+    }
+
     ProgramaDiaDto "1" -- "N" VoucherDto : contiene
     ProgramaDiaDto "1" -- "N" ReservaOrigenDto : contiene
     ProgramaDiaDto "1" -- "N" ClienteMovimientoDto : contiene
@@ -75,3 +109,4 @@ classDiagram
     ClienteMovimientoDto "1" -- "1" ComprobanteDto : tiene
     ClienteMovimientoDto "1" -- "1" ClienteDto : tiene
     ClienteMovimientoDto "1" -- "1" MonedaDto : tiene
+    ComprobanteDto "1" -- "1" CuentaDto : tiene

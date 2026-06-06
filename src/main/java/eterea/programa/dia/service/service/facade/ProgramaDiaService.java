@@ -67,6 +67,7 @@ public class ProgramaDiaService {
     }
 
     public void importOneFromWeb(Long orderNumberId, OrderNoteDto orderNote) {
+        log.debug("\n\nProcessing ProgramaDiaService.importOneFromWeb\n\n");
         if (orderNote == null) {
             orderNote = orderNoteService.findByOrderNumberId(orderNumberId);
         }
@@ -82,10 +83,10 @@ public class ProgramaDiaService {
         try {
             RequestUuidHolder.set(trackUuid);
             ProgramaDiaDto programaDiaDto = vouchersClient.importOneFromWeb(orderNote.getOrderNumberId());
-            log.debug("programaDiaDto -> {}", programaDiaDto.jsonify());
+            log.debug("\n\nprogramaDiaDto -> {}\n\n", programaDiaDto.jsonify());
             if (programaDiaDto.getVouchers() != null) {
                 VoucherDto voucher = programaDiaDto.getVouchers().getFirst();
-                log.debug("calling core.facturaReserva -> {}", voucher.getReservaId());
+                log.debug("\n\ncalling core.facturaReserva -> {}\n\n", voucher.getReservaId());
                 boolean isFacturado = makeFacturaProgramaDiaClient.facturaReserva(voucher.getReservaId(), 853);
                 if (!isFacturado) {
                     log.debug("error facturando reserva={}", voucher.getReservaId());

@@ -10,7 +10,7 @@
     </parent>
     <groupId>eterea</groupId>
     <artifactId>programa-dia-service</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>ETEREA.programa-dia-service</name>
     <description>eterea.programa-dia-service</description>
     <url/>

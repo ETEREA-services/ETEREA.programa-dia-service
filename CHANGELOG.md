@@ -1,3 +1,7 @@
+## [1.0.1] - 2026-06-06
+- fix: Mejora de formato en logs de depuración en importOneFromWeb (separadores \n\n)
+- docs: Actualización de diagramas Mermaid: agregado flujo importManyCompletedFromWeb y DTOs faltantes (EmpresaDto, TrackDto, CuentaDto, ReservaContextDto)
+
 ## [1.0.0] - 2026-05-30
 - feat: Actualización de Spring Boot Starter Parent de 3.5.8 a 4.0.6 (major)
 - feat: Actualización de Spring Cloud de 2025.0.0 a 2025.1.0
