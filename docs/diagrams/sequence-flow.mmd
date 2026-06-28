@@ -99,7 +99,7 @@ sequenceDiagram
     loop Por cada OrderNote completado
         PDS->>PDS: importOneFromWeb(orderNumberId, orderNote)
     end
-    PDS->>RC: findAllByFacturaPendiente()
+    PDS->>RC: findAllByFacturacionPendiente()
     activate RC
     RC-->>PDS: List~ReservaContextDto~
     deactivate RC
