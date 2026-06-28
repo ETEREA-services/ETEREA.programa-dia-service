@@ -1,3 +1,9 @@
+## [1.0.2] - 2026-06-28
+- chore: Actualización de Spring Boot Starter Parent de 4.0.6 a 4.1.0
+- chore: Actualización de Spring Cloud de 2025.1.0 a 2025.1.2
+- chore: Actualización de springdoc-openapi de 3.0.2 a 3.0.3
+- fix: Corrección de formato de fecha ISO 8601 en DTOs (Z → XX) para ClienteDto, ClienteMovimientoDto, ReservaDto, VoucherDto
+
 ## [1.0.1] - 2026-06-06
 - fix: Mejora de formato en logs de depuración en importOneFromWeb (separadores \n\n)
 - docs: Actualización de diagramas Mermaid: agregado flujo importManyCompletedFromWeb y DTOs faltantes (EmpresaDto, TrackDto, CuentaDto, ReservaContextDto)

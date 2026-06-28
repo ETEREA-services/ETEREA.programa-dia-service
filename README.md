@@ -1,21 +1,21 @@
 # ETEREA.programa-dia-service
 
-**Versión:** 1.0.1
-**Fecha de lanzamiento:** 2026-06-06
+**Versión:** 1.0.2
+**Fecha de lanzamiento:** 2026-06-28
 
 [![ETEREA.programa-dia-service CI](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/ETEREA-services/ETEREA.programa-dia-service/actions/workflows/maven.yml)
 ![Java](https://img.shields.io/badge/Java-25-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.6-green.svg)
-[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.0-blue.svg)](https://spring.io/projects/spring-cloud)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.0-green.svg)
+[![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.2-blue.svg)](https://spring.io/projects/spring-cloud)
 [![Maven](https://img.shields.io/badge/Maven-3.9.9-orange.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-✓-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Cambios recientes
 
-- Mejora de formato en logs de depuración en importOneFromWeb.
-- Actualización de diagramas Mermaid: agregado flujo importManyCompletedFromWeb y DTOs faltantes.
-- Dependencias principales: Spring Boot 4.0.6, Spring Cloud 2025.1.0, Java 25.
+- Actualización de Spring Boot a 4.1.0 y Spring Cloud a 2025.1.2.
+- Corrección de formato de fecha ISO 8601 en DTOs (Z → XX).
+- Dependencias principales: Spring Boot 4.1.0, Spring Cloud 2025.1.2, Java 25.
 
 ## Descripción del Proyecto
 ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utilizando Spring Boot. Este servicio gestiona la lógica de negocio relacionada con el programa del día, incluyendo la gestión de vouchers, reservas, clientes y manejo de diferencias en precios web.
@@ -43,7 +43,7 @@ ETEREA.programa-dia-service es un servicio de backend desarrollado en Java utili
 
 ## Diagramas y documentación
 
-Los diagramas Mermaid (`architecture.mmd`, `data-model.mmd`, `sequence-flow.mmd`) están actualizados a la fecha del release. Se han agregado los DTOs faltantes (EmpresaDto, TrackDto, CuentaDto, ReservaContextDto) al diagrama de modelo de datos y el flujo `importManyCompletedFromWeb` al diagrama de secuencia.
+Los diagramas Mermaid (`architecture.mmd`, `data-model.mmd`, `sequence-flow.mmd`) están actualizados a la fecha del release.
 
 ## Documentación
 - [Documentación de API](https://eterea-services.github.io/ETEREA.programa-dia-service/)
